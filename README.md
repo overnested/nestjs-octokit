@@ -68,6 +68,8 @@ export class AppModule {}
 Then you can inject the service:
 
 ```ts
+import { OctokitService } from 'octokit-nestjs';
+
 @Controller()
 export class SomeController {
   constructor(private readonly octokitService: OctokitService) {}
@@ -88,30 +90,29 @@ export class SomeController {
 To use plugins:
 
 ```ts
+import { OctokitModule } from 'octokit-nestjs';
 import { throttling } from '@octokit/plugin-throttling';
 
 @Module({
   imports: [
-    OctokitModule.forRootAsync({
+    OctokitModule.forRoot({
       isGlobal: true,
-      useFactory: async () => ({
-        plugins: [throttling], // Pass them here
-        octokitOptions: {
-          // Plugin options:
-          throttle: {
-            onRateLimit: (retryAfter, options, octokit) => {
-              octokit.log.warn(
-                `Request quota exhausted for request ${options.method} ${options.url}`
-              );
-            },
-            onAbuseLimit: (retryAfter, options, octokit) => {
-              octokit.log.warn(
-                `Abuse detected for request ${options.method} ${options.url}`
-              );
-            },
+      plugins: [throttling], // Pass them here
+      octokitOptions: {
+        // Plugin options:
+        throttle: {
+          onRateLimit: (retryAfter, options, octokit) => {
+            octokit.log.warn(
+              `Request quota exhausted for request ${options.method} ${options.url}`
+            );
+          },
+          onAbuseLimit: (retryAfter, options, octokit) => {
+            octokit.log.warn(
+              `Abuse detected for request ${options.method} ${options.url}`
+            );
           },
         },
-      }),
+      },
     }),
   ],
 })
