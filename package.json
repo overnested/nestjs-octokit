@@ -1,0 +1,63 @@
+{
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why"
+  },
+  "peerDependencies": {},
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "name": "nestjs-octokit",
+  "author": "Alireza Zamani",
+  "module": "dist/nestjs-octokit.esm.js",
+  "size-limit": [
+    {
+      "path": "dist/nestjs-octokit.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/nestjs-octokit.esm.js",
+      "limit": "10 KB"
+    }
+  ],
+  "devDependencies": {
+    "@nestjs/cli": "^8.2.0",
+    "@nestjs/testing": "^8.2.5",
+    "@size-limit/preset-small-lib": "^7.0.5",
+    "husky": "^7.0.4",
+    "size-limit": "^7.0.5",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.3.1",
+    "typescript": "^4.5.4"
+  },
+  "dependencies": {
+    "@nestjs/common": "^8.2.5",
+    "@nestjs/core": "^8.2.5",
+    "octokit": "^1.7.1",
+    "reflect-metadata": "^0.1.13"
+  }
+}
