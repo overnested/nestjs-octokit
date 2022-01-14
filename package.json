@@ -32,6 +32,19 @@
     "trailingComma": "es5"
   },
   "name": "nestjs-octokit",
+  "description": "Octokit module for NestJS",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alitnk/nestjs-octokit"
+  },
+  "keywords": [
+    "nestjs",
+    "nest",
+    "octokit",
+    "github",
+    "nest.js",
+    "nest-js"
+  ],
   "author": "Alireza Zamani",
   "module": "dist/nestjs-octokit.esm.js",
   "size-limit": [
