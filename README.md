@@ -26,6 +26,8 @@ npm install nestjs-octokit
 First register the module:
 
 ```ts
+import { OctokitModule } from 'nestjs-octokit';
+
 @Module({
   imports: [
     OctokitModule.forRoot({
@@ -43,6 +45,8 @@ export class AppModule {}
 Or if want to inject any dependency:
 
 ```ts
+import { OctokitModule } from 'nestjs-octokit';
+
 @Module({
   imports: [
     OctokitModule.forRootAsync({
@@ -77,4 +81,39 @@ export class SomeController {
     return response.data.items;
   }
 }
+```
+
+## Plugins
+
+To use plugins:
+
+```ts
+import { throttling } from '@octokit/plugin-throttling';
+
+@Module({
+  imports: [
+    OctokitModule.forRootAsync({
+      isGlobal: true,
+      useFactory: async () => ({
+        plugins: [throttling], // Pass them here
+        octokitOptions: {
+          // Plugin options:
+          throttle: {
+            onRateLimit: (retryAfter, options, octokit) => {
+              octokit.log.warn(
+                `Request quota exhausted for request ${options.method} ${options.url}`
+              );
+            },
+            onAbuseLimit: (retryAfter, options, octokit) => {
+              octokit.log.warn(
+                `Abuse detected for request ${options.method} ${options.url}`
+              );
+            },
+          },
+        },
+      }),
+    }),
+  ],
+})
+export class AppModule {}
 ```
