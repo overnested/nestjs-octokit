@@ -88,7 +88,6 @@ export class OctokitModule {
 
     if (options.plugins) {
       MyOctokit = MyOctokit.plugin(...options.plugins);
-      console.log('plugins applied');
     }
 
     return new MyOctokit(options.octokitOptions);
