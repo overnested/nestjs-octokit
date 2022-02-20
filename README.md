@@ -118,3 +118,7 @@ import { throttling } from '@octokit/plugin-throttling';
 })
 export class AppModule {}
 ```
+
+## TODO
+
+- [ ] Make `octokit` a peer dependency
