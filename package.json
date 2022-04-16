@@ -19,7 +19,9 @@
     "size": "size-limit",
     "analyze": "size-limit --why"
   },
-  "peerDependencies": {},
+  "peerDependencies": {
+    "octokit": "^1.7.1"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "tsdx lint"
@@ -70,7 +72,6 @@
   "dependencies": {
     "@nestjs/common": "^8.2.5",
     "@nestjs/core": "^8.2.5",
-    "octokit": "^1.7.1",
     "reflect-metadata": "^0.1.13"
   }
 }

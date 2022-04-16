@@ -12,13 +12,13 @@ Using `nestjs-octokit` you can register the Octokit module and configure it the 
 On Yarn:
 
 ```shell
-yarn add nestjs-octokit
+yarn add nestjs-octokit octokit
 ```
 
 On NPM:
 
 ```shell
-npm install nestjs-octokit
+npm install nestjs-octokit octokit
 ```
 
 ## Usage
@@ -118,7 +118,3 @@ import { throttling } from '@octokit/plugin-throttling';
 })
 export class AppModule {}
 ```
-
-## TODO
-
-- [ ] Make `octokit` a peer dependency
