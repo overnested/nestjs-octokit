@@ -91,7 +91,10 @@ export class OctokitModule {
     if (options.plugins) {
       MyOctokit = MyOctokit.plugin(...options.plugins);
     }
-
-    return new MyOctokit(options.octokitOptions);
+    let instanceOptions: OctokitModuleOptions["octokitOptions"] = {...options.octokitOptions};
+    if (typeof instanceOptions?.auth === "function") {
+      instanceOptions.auth = instanceOptions.auth();
+    }
+    return new MyOctokit(instanceOptions);
   }
 }
