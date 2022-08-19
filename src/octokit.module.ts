@@ -1,4 +1,4 @@
-import { DynamicModule, Module, Provider } from '@nestjs/common';
+import { DynamicModule, Module, Provider, Scope } from '@nestjs/common';
 import { Octokit } from 'octokit';
 import {
   OctokitModuleAsyncOptions,
@@ -20,6 +20,7 @@ export class OctokitModule {
       providers: [
         {
           provide: OCTOKIT,
+          scope: options.octokitScope || Scope.DEFAULT,
           useValue: this.instantiateOctokit(options),
         },
       ],
@@ -33,6 +34,7 @@ export class OctokitModule {
       useFactory: (options: OctokitModuleOptions) =>
         this.instantiateOctokit(options),
       provide: OCTOKIT,
+      scope: options.octokitScope || Scope.DEFAULT,
       inject: [OCTOKIT_OPTIONS],
     };
     return {
