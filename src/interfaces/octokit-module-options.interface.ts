@@ -1,10 +1,11 @@
-import { ModuleMetadata, Type } from '@nestjs/common';
+import { ModuleMetadata, Scope, Type } from '@nestjs/common';
 import { Octokit } from 'octokit';
 
 export interface OctokitModuleOptions {
   isGlobal?: boolean;
   octokitOptions?: ConstructorParameters<typeof Octokit>[0];
   plugins?: Parameters<typeof Octokit['plugin']>;
+  octokitScope?: Scope;
 }
 
 export type AsyncOctokitModuleOptions = Omit<OctokitModuleOptions, 'isGlobal'>;
@@ -24,4 +25,5 @@ export interface OctokitModuleAsyncOptions
     ...args: any[]
   ) => Promise<AsyncOctokitModuleOptions> | AsyncOctokitModuleOptions;
   inject?: any[];
+  octokitScope?: Scope,
 }
