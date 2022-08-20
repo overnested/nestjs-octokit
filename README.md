@@ -85,6 +85,38 @@ export class SomeController {
 }
 ```
 
+### Short-lived access tokens
+
+If your access tokens are short-lived, you can configure a [request
+scoped](https://docs.nestjs.com/fundamentals/injection-scopes#provider-scope)
+Octokit provider with an `auth` callback, to renew the Octokits
+and auth tokens:
+
+```ts
+import { OctokitModule } from 'nestjs-octokit';
+import { Scope } from '@nestjs/common';
+
+@Module({
+  imports: [
+    OctokitModule.forRootAsync({
+      isGlobal: true,
+      // Set request scope
+      octokitScope: Scope.REQUEST,
+      imports: [TokenModule],
+      inject: [TokenService],
+      useFactory: async (tokenService: TokenService) => ({
+        octokitOptions: {
+          // `auth` is a callback now. Return short-lived tokens
+          auth: () => tokenService.produceToken(),
+        },
+      }),
+    }),
+    // ...
+  ],
+})
+export class AppModule {}
+```
+
 ## Plugins
 
 To use plugins:
