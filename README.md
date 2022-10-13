@@ -68,7 +68,7 @@ export class AppModule {}
 Then you can inject the service:
 
 ```ts
-import { OctokitService } from 'octokit-nestjs';
+import { OctokitService } from 'nestjs-octokit';
 
 @Controller()
 export class SomeController {
@@ -122,7 +122,7 @@ export class AppModule {}
 To use plugins:
 
 ```ts
-import { OctokitModule } from 'octokit-nestjs';
+import { OctokitModule } from 'nestjs-octokit';
 import { throttling } from '@octokit/plugin-throttling';
 
 @Module({
